@@ -1,0 +1,20 @@
+./buildroot/output/*
+
+# Ignore everything in linux-custom except .config
+output/build/linux-custom/*
+!output/build/linux-custom/.config
+
+# Ignore everything inside drm
+output/build/linux-custom/drivers/gpu/drm/*
+
+# But keep sitronix directory and its contents
+!output/build/linux-custom/drivers/gpu/drm/sitronix/
+!output/build/linux-custom/drivers/gpu/drm/sitronix/**
+
+# Keep Kconfig and Makefile
+!output/build/linux-custom/drivers/gpu/drm/Kconfig
+!output/build/linux-custom/drivers/gpu/drm/Makefile
+!output/build/linux-custom/
+!output/build/linux-custom/drivers/
+!output/build/linux-custom/drivers/gpu/
+!output/build/linux-custom/drivers/gpu/drm/
