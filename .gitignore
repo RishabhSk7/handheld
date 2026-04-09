@@ -54,3 +54,12 @@ buildroot/support/
 
 
 sdcard.img
+buildroot/dl
+buildroot/package
+buildroot/toolchain
+buildroot/system
+buildroot/support
+buildroot/linux
+buildroot/fs
+buildroot/docs
+buildroot/boot
