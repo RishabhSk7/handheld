@@ -1,0 +1,110 @@
+/*
+ * Device Tree overlay for rpi-display by Watterott
+ *
+ */
+
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "brcm,bcm2708";
+
+	fragment@0 {
+		target = <&spi0>;
+		__overlay__ {
+			status = "okay";
+
+			spidev@0{
+				status = "disabled";
+			};
+
+			spidev@1{
+				status = "disabled";
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <&gpio>;
+		__overlay__ {
+			rpi_display_pins: rpi_display_pins {
+				brcm,pins = <18 23 24 25>;
+				brcm,function = <1 1 1 0>; /* out out out in */
+			};
+		};
+	};
+
+	fragment@2 {
+		target = <&spi0>;
+		__overlay__ {
+			/* needed to avoid dtc warning */
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			rpidisplay: rpi-display@0{
+				compatible = "mi,mi0283qt";
+				reg = <0>;
+				//pinctrl-names = "default";
+				//pinctrl-0 = <&rpi_display_pins>;
+
+				spi-max-frequency = <32000000>;
+				rotation = <90>;
+				reset-gpios = <&gpio 25 0>;
+				dc-gpios = <&gpio 24 0>;
+				backlight = <&backlight>;
+			};
+
+		};
+	};
+
+	fragment@3 {
+		target-path = "/soc";
+		__overlay__ {
+			backlight: backlight {
+				compatible = "gpio-backlight";
+				gpios = <&gpio 18 0>;
+			};
+		};
+	};
+
+/*
+
+Alternative pwm backlight section
+
+	fragment@3 {
+		target = <&gpio>;
+		__overlay__ {
+			// This is necessary on Pi1,2,Z not Pi3
+			pinctrl-0 = <&gpioout &alt0>; // Remove i2s_alt0 which claims gpio18
+		};
+	};
+
+	fragment@4 {
+		target = <&pwm>;
+		__overlay__ {
+			pinctrl-names = "default";
+			pinctrl-0 = <&pwm0_gpio18>;
+			status = "okay";
+		};
+	};
+
+	fragment@5 {
+		target-path = "/soc";
+		__overlay__ {
+			backlight: backlight {
+				compatible = "pwm-backlight";
+				pwms = <&pwm 0 5000000>;
+				// These levels need calibration
+				brightness-levels = <0 5 10 20 40 60 80 100>;
+				default-brightness-level = <7>;
+			};
+		};
+	};
+*/
+
+	__overrides__ {
+		speed = <&rpidisplay>,"spi-max-frequency:0";
+		rotation = <&rpidisplay>,"rotation:0";
+		format = <&rpidisplay>,"format";
+	};
+};

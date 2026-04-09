@@ -1,0 +1,8 @@
+- generic MAX98357A board
+- speaker hai
+- nfc reader
+- prototype board
+- button caps
+- 2x20 female header
+- JST connectors
+- solid core wires - 22 - 24 awg- 5 meters = 5 units

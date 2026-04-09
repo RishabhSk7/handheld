@@ -1,20 +1,56 @@
-./buildroot/output/*
+# 1. Ignore everything in the linux-custom directory
+!buildroot/output/
 
-# Ignore everything in linux-custom except .config
-output/build/linux-custom/*
-!output/build/linux-custom/.config
+buildroot/output/*
 
-# Ignore everything inside drm
-output/build/linux-custom/drivers/gpu/drm/*
 
-# But keep sitronix directory and its contents
-!output/build/linux-custom/drivers/gpu/drm/sitronix/
-!output/build/linux-custom/drivers/gpu/drm/sitronix/**
+!buildroot/output/build/
+buildroot/output/build/*
 
-# Keep Kconfig and Makefile
-!output/build/linux-custom/drivers/gpu/drm/Kconfig
-!output/build/linux-custom/drivers/gpu/drm/Makefile
-!output/build/linux-custom/
-!output/build/linux-custom/drivers/
-!output/build/linux-custom/drivers/gpu/
-!output/build/linux-custom/drivers/gpu/drm/
+!buildroot/output/build/linux-custom/
+buildroot/output/build/linux-custom/*
+
+!buildroot/output/build/linux-custom/.config
+
+!buildroot/output/build/linux-custom/drivers/
+buildroot/output/build/linux-custom/drivers/*
+
+
+!buildroot/output/build/linux-custom/drivers/gpu/
+buildroot/output/build/linux-custom/drivers/gpu/*
+
+!buildroot/output/build/linux-custom/drivers/gpu/drm/
+buildroot/output/build/linux-custom/drivers/gpu/drm/*
+
+!buildroot/output/build/linux-custom/drivers/gpu/drm/Makefile
+!buildroot/output/build/linux-custom/drivers/gpu/drm/Kconfig
+!buildroot/output/build/linux-custom/drivers/gpu/drm/sitronix
+!buildroot/output/build/linux-custom/drivers/gpu/drm/sitronix/*
+
+
+buildroot/package/*
+!buildroot/package/retroarch/
+!buildroot/package/retroarch/*
+
+
+*/__pycache__/*
+__pycache__/*
+**/__pycache__/
+
+!buildroot/board/
+buildroot/board/*
+
+!buildroot/board/raspberrypi4-64/
+buildroot/board/raspberrypi4-64/*
+!buildroot/board/raspberrypi4-64/cmdline.txt
+!buildroot/board/raspberrypi4-64/config_4_64bit.txt
+!buildroot/board/raspberrypi4-64/overlay/
+!buildroot/board/raspberrypi4-64/overlay/*
+!buildroot/board/raspberrypi4-64/patches/
+!buildroot/board/raspberrypi4-64/patches/*
+
+buildroot/utils/
+buildroot/support/
+
+
+sdcard.img

@@ -1,0 +1,19 @@
+#/bin/sh
+
+
+case "$1" in
+start)
+	modprobe brcmfmac
+	echo "Starting WIFI..."
+	ip link set wlan0 up
+	wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant.conf
+	udhcpc -i wlan0 -t 3 -T 1 -q
+	;;
+stop)
+	killall wpa_supplicant
+	;;
+restart)
+	$0 stop
+	$0 start
+	;;
+esac

@@ -1,0 +1,4 @@
+config BR2_PACKAGE_FBCP_ILI9341
+	bool "fbcp-ili9341"
+	help
+	  High performance framebuffer copy to SPI displays.

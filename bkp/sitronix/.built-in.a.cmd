@@ -1,0 +1,1 @@
+savedcmd_drivers/gpu/drm/sitronix/built-in.a := rm -f drivers/gpu/drm/sitronix/built-in.a;  printf "drivers/gpu/drm/sitronix/%s " st7789v.o | xargs /home/Sk7/Documents/major_handheld/buildroot/output/host/bin/aarch64-linux-ar cDPrST drivers/gpu/drm/sitronix/built-in.a

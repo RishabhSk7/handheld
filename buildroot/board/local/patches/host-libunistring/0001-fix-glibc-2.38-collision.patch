@@ -1,0 +1,26 @@
+--- a/lib/stdlib.in.h
++++ b/lib/stdlib.in.h
+@@ -804,11 +804,6 @@
+ # endif
+ #endif
+ 
+-#if @GNULIB_BSEARCH@
+-# if !@HAVE_BSEARCH@
+-_GL_EXTERN_C void *bsearch (const void *__key, const void *__base,
+-                            size_t __nmemb, size_t __size,
+-                            int (*__compar) (const void *, const void *))
+-     _GL_ARG_NONNULL ((1, 2, 5));
+-# endif
+-#endif
+--- a/lib/wchar.in.h
++++ b/lib/wchar.in.h
+@@ -838,10 +838,6 @@
+ # endif
+ #endif
+ 
+-#if @GNULIB_WMEMCHR@
+-# if !@HAVE_WMEMCHR@
+-_GL_EXTERN_C wchar_t *wmemchr (const wchar_t *__s, wchar_t __wc, size_t __n)
+-     _GL_ARG_NONNULL ((1));
+-# endif
+-#endif

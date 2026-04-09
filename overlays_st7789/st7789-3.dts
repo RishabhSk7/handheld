@@ -1,0 +1,59 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    /* Target the Pi 4 architecture */
+    compatible = "brcm,bcm2835", "brcm,bcm2711";
+
+    /* Fragment 0: Disable the default SPI user-space driver to free the bus */
+    fragment@0 {
+        target = <&spi0>;
+        __overlay__ {
+            status = "okay";
+            spidev@0 {
+                status = "disabled";
+            };
+        };
+    };
+
+    /* Fragment 1: Configure our custom Data/Command and Reset pins */
+    fragment@1 {
+        target = <&gpio>;
+        __overlay__ {
+            st7789v_pins: st7789v_pins {
+                brcm,pins = <25 24>;   /* DC (25), RESET (24) */
+                brcm,function = <1 1>; /* 1 = Output */
+            };
+        };
+    };
+
+    /* Fragment 2: Attach the ST7789 DRM driver to SPI0 */
+    fragment@2 {
+        target = <&spi0>;
+        __overlay__ {
+            #address-cells = <1>;
+            #size-cells = <0>;
+
+            panel: panel@0 {
+                /* This compatible string MUST match the one in your .c driver file */
+                compatible = "sitronix,st7789v";
+                reg = <0>; /* Chip Select 0 (CE0) */
+
+                pinctrl-names = "default";
+                pinctrl-0 = <&st7789v_pins>;
+
+                spi-max-frequency = <32000000>; /* 32MHz */
+
+                /* Define the GPIOs. Note: 1 = Active Low, 0 = Active High */
+                reset-gpios = <&gpio 24 1>;
+                dc-gpios = <&gpio 25 0>;
+
+                /* Resolution - adjust if you are using a 240x240 screen instead of 240x320 */
+                width = <240>;
+                height = <320>;
+                buswidth = <8>;
+                rotate = <0>;
+            };
+        };
+    };
+};

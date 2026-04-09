@@ -1,0 +1,12 @@
+{
+  "roms_dir": "./roms",
+  "cores_dir": "./cores",
+  "assets_dir": "./assets",
+  "retroarch_bin": "retroarch",
+  "core_map": {
+    "gba": "mgba_libretro.so"
+  },
+  "window_width": 320,
+  "window_height": 240,
+  "target_fps": 60
+}

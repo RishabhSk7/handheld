@@ -1,0 +1,4 @@
+config BR2_PACKAGE_RETROARCH
+	bool "retroarch"
+	help
+		RetroArch frontend for liberto

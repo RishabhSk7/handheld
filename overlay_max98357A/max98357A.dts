@@ -1,0 +1,52 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "brcm,bcm2708", "brcm,bcm2711";
+
+    /*
+     * Enable I2S controller
+     */
+    fragment@0 {
+        target = <&i2s>;
+        __overlay__ {
+            status = "okay";
+        };
+    };
+
+    /*
+     * Create sound card using simple-audio-card
+     */
+    fragment@1 {
+        target-path = "/";
+        __overlay__ {
+
+            sound: sound {
+                compatible = "simple-audio-card";
+                simple-audio-card,name = "MAX98357A";
+                simple-audio-card,format = "i2s";
+
+                /* Pi is master */
+                simple-audio-card,bitclock-master = <&cpu_dai>;
+                simple-audio-card,frame-master   = <&cpu_dai>;
+
+                simple-audio-card,cpu {
+                    sound-dai = <&i2s>;
+                };
+
+                simple-audio-card,codec {
+                    sound-dai = <&max98357a>;
+                };
+            };
+
+            /*
+             * MAX98357A codec node
+             */
+            max98357a: max98357a {
+                compatible = "maxim,max98357a";
+                #sound-dai-cells = <0>;
+                status = "okay";
+            };
+        };
+    };
+};

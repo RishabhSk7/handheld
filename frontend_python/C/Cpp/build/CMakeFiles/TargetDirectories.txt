@@ -1,0 +1,3 @@
+/home/Sk7/Documents/major_handheld/frontend_python/C/Cpp/build/CMakeFiles/handheld_launcher.dir
+/home/Sk7/Documents/major_handheld/frontend_python/C/Cpp/build/CMakeFiles/edit_cache.dir
+/home/Sk7/Documents/major_handheld/frontend_python/C/Cpp/build/CMakeFiles/rebuild_cache.dir
